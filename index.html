@@ -1,0 +1,308 @@
+<html lang="fr">
+    <head>
+        <title>Nodejs.paris</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="/tablesorter/css/theme.default.css">
+        <script type="text/javascript" src="/jquery/jquery.js"></script>
+        <script type="text/javascript" src="/tablesorter/js/jquery.tablesorter.js"></script>
+        <script type="text/javascript" src="/tablesorter/js/jquery.tablesorter.widgets.js"></script>
+    </head>
+    <body>
+        <script>
+            $(function(){
+                
+            var FormationHeaders = [
+                {label:"Nom",field:"name"},
+                {label:"URL",field:"url"},
+                {label:"Type",field:"type"},
+                {label:"Traduction",field:"translation"},
+                {label:"",field:"translation_comment",comment:true},
+                {label:"Niveau",field:"level"},
+                {label:"",field:"level_comment",comment:true},
+                {label:"Pedagogie",field:"quality"},
+                {label:"",field:"quality_comment",comment:true},
+                {label:"Total",field:"total"},
+                
+            ];
+            var FormationList = [
+                {
+                    name:"CodeAcademy",
+                    url:"http://www.codecademy.com/",
+                    type:"Interactif",
+                    translation:"3",
+                    translation_comment:"Intégralement traduit",
+                    level:"2",
+                    level_comment:"De débutant à moyen",
+                    quality:"3",
+                    quality_comment:"Excellent",
+                    internal:""
+                },
+                {
+                    name:"NodeSchool",
+                    url:"http://nodeschool.io/",
+                    type:"Collection",
+                    translation:"2",
+                    translation_comment:"Traduit mais ateliers en anglais",
+                    level:"3",
+                    level_comment:"Pour tous niveaux",
+                    quality:"3",
+                    quality_comment:"Des programmes interactifs bien fait",
+                    internal:""
+                },
+                {
+                    name:"LearnJS",
+                    url:"http://www.learn-js.org/",
+                    type:"Interactif",
+                    translation:"1",
+                    translation_comment:"Anglais uniquement",
+                    level:"2",
+                    level_comment:"De débutant à moyen",
+                    quality:"1",
+                    quality_comment:"Interactivité cassée, cours moyen",
+                    internal:""
+                },
+                {
+                    name:"LearnYouNode",
+                    url:"https://github.com/rvagg/learnyounode/",
+                    type:"Interactif",
+                    translation:"1",
+                    translation_comment:"Anglais complexe",
+                    level:"2",
+                    level_comment:"De moyen à expert",
+                    quality:"3",
+                    quality_comment:"Quelques imprécisions mais bien fait",
+                    internal:""
+                },
+                {
+                    name:"Stream adventure",
+                    url:"https://github.com/substack/stream-adventure/",
+                    type:"Interactif",
+                    translation:"1",
+                    translation_comment:"Anglais complexe",
+                    level:"2",
+                    level_comment:"De moyen à expert",
+                    quality:"3",
+                    quality_comment:"Un workshopper de nodeschool.io",
+                    internal:""
+                },
+                {
+                    name:"Node Tuts",
+                    url:"http://nodetuts.com",
+                    type:"Vidéos",
+                    translation:"1",
+                    translation_comment:"Anglais complexe (audio)",
+                    level:"2",
+                    level_comment:"De débutant à moyen",
+                    quality:"3",
+                    quality_comment:"Screencasts pratiques",
+                    internal:""
+                },
+                {
+                    name:"Eloquent Javascript",
+                    url:"http://eloquentjavascript.net/",
+                    type:"Rédactionnel",
+                    translation:"1",
+                    translation_comment:"Anglais simple",
+                    level:"3",
+                    level_comment:"De débutant à moyen",
+                    quality:"2",
+                    quality_comment:"Beaucoup de code en exemple",
+                    internal:""
+                },
+                {
+                    name:"NodeBeginner",
+                    url:"http://www.nodebeginner.org",
+                    type:"Rédactionnel",
+                    translation:"1",
+                    translation_comment:"Anglais simple",
+                    level:"2",
+                    level_comment:"De débutant à moyen",
+                    quality:"2",
+                    quality_comment:"Didactique avec des exemples",
+                    internal:""
+                },
+                {
+                    name:"The Art of Node",
+                    url:"https://github.com/maxogden/art-of-node/#the-art-of-node",
+                    type:"Rédactionnel",
+                    translation:"1",
+                    translation_comment:"Anglais simple",
+                    level:"2",
+                    level_comment:"De moyen à confirmé",
+                    quality:"2",
+                    quality_comment:"Beaucoup de liens et d'exemples",
+                    internal:""
+                },
+                {
+                    name:"Node Guide",
+                    url:"http://nodeguide.com/beginner.html",
+                    type:"Rédactionnel",
+                    translation:"1",
+                    translation_comment:"Anglais simple",
+                    level:"1",
+                    level_comment:"Pour débutant",
+                    quality:"2",
+                    quality_comment:"Simple et didactique",
+                    internal:""
+                },
+                {
+                    name:"NodeJS for beginners",
+                    url:"http://code.tutsplus.com/tutorials/node-js-for-beginners--net-26314",
+                    type:"Rédactionnel",
+                    translation:"1",
+                    translation_comment:"Anglais simple",
+                    level:"1",
+                    level_comment:"Pour débutant",
+                    quality:"2",
+                    quality_comment:"Introduction courte et efficace",
+                    internal:""
+                },
+                {
+                    name:"Absolute beginners guide to nodejs",
+                    url:"http://blog.modulus.io/absolute-beginners-guide-to-nodejs",
+                    type:"Rédactionnel",
+                    translation:"",
+                    translation_comment:"",
+                    level:"",
+                    level_comment:"",
+                    quality:"",
+                    quality_comment:"",
+                    internal:""
+                },
+                {
+                    name:"Mastering Node",
+                    url:"https://github.com/tj/masteringnode",
+                    type:"Rédactionnel",
+                    translation:"",
+                    translation_comment:"",
+                    level:"",
+                    level_comment:"",
+                    quality:"",
+                    quality_comment:"",
+                    internal:""
+                },
+                {
+                    name:"HowToNode",
+                    url:"http://howtonode.org/",
+                    type:"Rédactionnel",
+                    translation:"",
+                    translation_comment:"",
+                    level:"",
+                    level_comment:"",
+                    quality:"",
+                    quality_comment:"",
+                    internal:""
+                },
+                {
+                    name:"JavascriptIsSexy",
+                    url:"http://javascriptissexy.com/javascript-objects-in-detail/",
+                    type:"Rédactionnel",
+                    translation:"",
+                    translation_comment:"",
+                    level:"",
+                    level_comment:"",
+                    quality:"",
+                    quality_comment:"",
+                    internal:""
+                },
+                {
+                    name:"JS Attitude",
+                    url:"http://www.js-attitude.fr/",
+                    type:"Rédactionnel",
+                    translation:"",
+                    translation_comment:"",
+                    level:"",
+                    level_comment:"",
+                    quality:"",
+                    quality_comment:"",
+                    internal:""
+                },
+                {
+                    name:"Node: Up and Running",
+                    url:"http://chimera.labs.oreilly.com/books/1234000001808/index.html",
+                    type:"Rédactionnel",
+                    translation:"",
+                    translation_comment:"",
+                    level:"",
+                    level_comment:"",
+                    quality:"",
+                    quality_comment:"",
+                    internal:""
+                },
+            ];
+                
+            var table = $("<table></table>");
+            var thead = $("<tr></tr>");
+            var tbody = $("")
+            $.each(FormationHeaders, function(hid,header){
+               
+                var c = (header.comment === true ) ? "comment" : "";
+                
+                thead.append('<th class="'+c+'">'+header.label+"</th>");
+                
+            });
+            $("#formationList thead").append(thead)
+
+            $.each(FormationList,function(fid,formation){
+                var row = $("<tr></tr>");
+                $.each(FormationHeaders, function(hid,header){
+                    var field = header.field;
+                    var txt =  (field in formation ) ? formation[field] : "";
+                    var c = (header.comment === true ) ? "comment" : "";
+                        
+                    if( "url" === field ){
+                        txt = '<a target="_blank" href="'+txt+'">'+txt+'</a>';
+                    }
+                    if( "total" === field ){
+                        txt = Number( formation.level) + Number( formation.quality) + Number(formation.translation);
+                    }
+                    row.append('<td class="'+c+'">'+txt+"</td>")
+                })
+                $("#formationList tbody").append(row)
+            })
+            
+            $("table").tablesorter({
+                sortList: [[9,1]]
+            })
+            $("#hideComments").on("click",function(){
+                $(".comment").toggle();
+            })
+            
+        })
+        </script>
+        <style>
+        .comment {
+            font-style: italic;
+            color: #888;
+        }
+        </style>    
+        <strong>Formation</strong>
+        <a href="#" id="hideComments">Masquer les commentaires</a>
+        <table id="formationList" class="table">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+        <strong>Réseaux sociaux</strong>
+        <br>
+        <br>
+        meeetup.com
+        <br>
+        <a href="http://www.meetup.com/Nodejs-Paris/">http://www.meetup.com/Nodejs-Paris/</a>
+        <br>
+        <br>
+        Nodejsparis
+        <br>
+        <a href="http://www.nodejsparis.fr/meetups">http://www.nodejsparis.fr/meetups</a>
+        <br>
+        <br>
+        ParisJS
+        <br>
+        <a href="http://parisjs.org/">http://parisjs.org/</a>
+        <br>
+        <br>
+        nodeschool.io paris/
+        <br>
+        <a href="http://nodeschool.io/paris/">http://nodeschool.io/paris/</a>
+        <br>
+    </body>
+</html>

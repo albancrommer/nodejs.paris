@@ -50,6 +50,30 @@
                     internal:""
                 },
                 {
+                    name:"NodeJS : le livre du débutant",
+                    url:"http://nodejs.developpez.com/tutoriels/javascript/node-js-livre-debutant/",
+                    type:"Rédactionnel",
+                    translation:"3",
+                    translation_comment:"En français",
+                    level:"2",
+                    level_comment:"De débutant à moyen",
+                    quality:"2",
+                    quality_comment:"Traduction FR de nodebeginner.org",
+                    internal:""
+                },
+                {
+                    name:"Decouvrir NodeJS",
+                    url:"https://github.com/scastiel/decouvrir-nodejs",
+                    type:"Rédactionnel",
+                    translation:"3",
+                    translation_comment:"En français",
+                    level:"2",
+                    level_comment:"De débutant à moyen",
+                    quality:"2",
+                    quality_comment:"Bien fait",
+                    internal:""
+                },
+                {
                     name:"LearnJS",
                     url:"http://www.learn-js.org/",
                     type:"Interactif",
@@ -107,6 +131,18 @@
                     level_comment:"De débutant à moyen",
                     quality:"2",
                     quality_comment:"Beaucoup de code en exemple",
+                    internal:""
+                },
+                {
+                    name:"Developpez.com",
+                    url:"http://javascript.developpez.com/",
+                    type:"Collection",
+                    translation:"3",
+                    translation_comment:"Tout en français",
+                    level:"3",
+                    level_comment:"Pour tous niveaux",
+                    quality:"2",
+                    quality_comment:"Des livres et des articles généralement bien faits",
                     internal:""
                 },
                 {
@@ -257,50 +293,189 @@
                 $(".comment").toggle();
             })
             
-        })
+        
+        // Cookbook !
+        var tagHandler = {
+            css:{
+                link : "cookbook-show"
+            },
+            html : {
+                wrapper : "#cookbook-wrapper",
+                menu : "#cookbook-menu",
+                search : "#cookbook-search",
+                picker : "#cookbook-picker",
+                link : ".cookbook-show",
+                list : "#cookbook-list",
+                show : "#cookbook-show",
+                        
+            },
+            list : function( tag ){
+                if( !tag || !( tag in this.tagList)){
+                    return;
+                }
+                var that = this;
+                var fileList = this.tagList[tag].sort();
+                $(this.html.list).html("")
+                $.each(fileList, function(k,v){
+                    $(that.html.list).append('<a href="/cookbook/'+v+'" rel="'+v+'" class="'+that.css.link+'">'+v+'</a>'); 
+                });
+                $(that.html.link).on("click",function(event){
+                    event.preventDefault()
+                    that.show($(this).attr("rel"))
+                })
+                
+            },
+            build: function(tagList){
+                var that = this ;
+                this.tagList = tagList;
+                $(this.html.picker).html('');
+
+                $.each(tagList,function(k,v){
+                    $(that.html.picker).append('<option value="'+k+'">'+k+'</option>');
+                })
+                
+                // Binds
+                $(that.html.picker).on("change",function(event){
+                    that.list($(this).val())
+                })
+                that.list("all");
+            },
+            show : function(file){
+                var that = this;
+                $.get("cookbook/"+file, {},function(data,err){
+                    $(that.html.show).html(data);
+                },"html")
+                .fail(function() {
+                  alert( "Une erreur est survenue." );
+                })
+ 
+            },
+            tagList : {},
+            
+        }
+        $.get("cookbook.json",function(data,err){ tagHandler.build( data);  })
+
+    })
+        
+        
         </script>
         <style>
+
+        @font-face {
+            font-family: 'questaregular';
+            src: url('questa_regular_macroman/2-Questa_Regular-webfont.eot');
+            src: url('questa_regular_macroman/2-Questa_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+                 url('questa_regular_macroman/2-Questa_Regular-webfont.woff2') format('woff2'),
+                 url('questa_regular_macroman/2-Questa_Regular-webfont.woff') format('woff'),
+                 url('questa_regular_macroman/2-Questa_Regular-webfont.ttf') format('truetype'),
+                 url('questa_regular_macroman/2-Questa_Regular-webfont.svg#questaregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+
+        *{
+            font-family:questaregular,"Big Caslon","Bodoni MT",Didot,"Didot LT STD","Hoefler Text",Garamond,"Times New Roman",Times,serif;
+        }
+        
+        h2 {font-size: 24pt;}
+
+        p{
+            font-size: 16pt;
+        }
+        .container{
+                width: 80%;
+                margin: auto;
+                min-width:1100px;
+        }
         .comment {
             font-style: italic;
-            color: #888;
+            color: #37abc8;
         }
-        </style>    
-        <strong>Formation</strong>
-        <a href="#" id="hideComments">Masquer les commentaires</a>
+        .logo span{
+            color: #37abc8;
+        }
+        
+        /* COOKBOOK */
+        
+        #cookbook-wrapper {
+            overflow: hidden;
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 12px;
+        }        
+        div#cookbook-list {
+            float: left;
+            margin: 12px 6px;
+            width: 150px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        #cookbook-menu {
+            width: 100%;
+            background: #eee;
+            padding: 24px 0;
+            text-indent: 24px;
+        }
+        a.cookbook-show {
+            display: block;
+        }
+        #cookbook-show-wrapper {
+            width: auto;
+            float: left;
+        }
+        #cookbook-show{
+            background: #333;
+            color: #eee;
+            min-width: 1050px;
+            min-height: 250px;
+            white-space: pre-wrap;
+            font-family: Lucida Sans Typewriter, Lucida Console, monaco, Bitstream Vera Sans Mono, monospace;
+            line-height: 1.5em;
+            font-size: 0.8em;
+            padding-left: 12px;
+        }
+        </style>   
+    <div class="container">
+        <h1 class="logo">nodejs<span>.paris</span></h1> 
+        <h2>Formations</h2>
+        <p>Liste triable de formations pour apprendre javascript et node en particulier.</p>
         <table id="formationList" class="table">
             <thead></thead>
             <tbody></tbody>
         </table>
-        <strong>Réseaux sociaux</strong>
-        <br>
-        <br>
+        <a href="#" id="hideComments">Masquer les commentaires</a>
+        <h2>Cookbook</h2>
+        <p>Qu'est-ce ? Une liste de solutions organisée par tag. Chaque solution peut être copiée/collée pour la mettre en application.</p>
+        <div id="cookbook-wrapper" >
+            <div id="cookbook-menu">
+                <label for="cookbook-tag-picker">Choisir un tag</label>
+                <select id="cookbook-picker" name="cookbook-tag-picker"></select>
+            </div>
+            <div id="cookbook-list">
+                Choisir un tag
+            </div>
+            <div id="cookbook-show-wrapper">
+                <pre id="cookbook-show">
+                </pre>
+
+            </div>
+        </div>
+		<h2>Réseaux sociaux</h2>
         meeetup.com
-        <br>
         <a href="http://www.meetup.com/Nodejs-Paris/">http://www.meetup.com/Nodejs-Paris/</a>
-        <br>
-        <br>
         Nodejsparis
-        <br>
         <a href="http://www.nodejsparis.fr/meetups">http://www.nodejsparis.fr/meetups</a>
-        <br>
-        <br>
+       	Linkedin 
+        <a href="https://www.linkedin.com/groups/nodejs-france-3344647/about">linkedin nodejs-france</a>
         ParisJS
-        <br>
         <a href="http://parisjs.org/">http://parisjs.org/</a>
-        <br>
-        <br>
         nodeschool.io paris/
-        <br>
         <a href="http://nodeschool.io/paris/">http://nodeschool.io/paris/</a>
-        <br>
-        <br>
-        <br>
         
-        <strong>Blogs & al.</strong>
-        <br>
-        <br>
+        <h2>Blogs & al.</h2>
             <a href="http://www.js-attitude.fr/">JS Attitude</a>
                     
-
+		</div>
     </body>
 </html>

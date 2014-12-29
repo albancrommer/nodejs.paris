@@ -317,7 +317,7 @@
                 var fileList = this.tagList[tag].sort();
                 $(this.html.list).html("")
                 $.each(fileList, function(k,v){
-                    $(that.html.list).append('<a href="/cookbook/'+v+'" rel="'+v+'" class="'+that.css.link+'">'+v+'</a>'); 
+                    $(that.html.list).append('<a href="/cookbook/'+v+'" rel="'+v+'" class="'+that.css.link+'" title="'+that.fileList[v].description+'">'+that.fileList[v].name+'</a>'); 
                 });
                 $(that.html.link).on("click",function(event){
                     event.preventDefault()
@@ -325,12 +325,14 @@
                 })
                 
             },
-            build: function(tagList){
+            build: function(data){
                 var that = this ;
-                this.tagList = tagList;
+                console.log(data)
+                this.tagList = data.tagList;
+                this.fileList = data.fileList;
                 $(this.html.picker).html('');
 
-                $.each(tagList,function(k,v){
+                $.each(this.tagList,function(k,v){
                     $(that.html.picker).append('<option value="'+k+'">'+k+'</option>');
                 })
                 
@@ -350,6 +352,7 @@
                 })
  
             },
+            fileList : {},
             tagList : {},
             
         }

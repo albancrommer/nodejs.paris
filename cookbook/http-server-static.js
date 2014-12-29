@@ -1,6 +1,8 @@
 /**
   * Serves static files if they exist in the document root 
   * 
+  * @name Static HTTP
+  * @description Serves static files if they exist in the document root 
   * @tags http server static 
   * @author Nodejs.paris
   */ 
@@ -26,7 +28,7 @@ http.createServer(function(req, res) {
             res.writeHead(200, {'Content-Type': 'text/plain'});
             res.write('404 Not Found\n');
             res.end();
-			return;
+            return;
         }
         var mimeType = mimeTypes[path.extname(filename).split(".")[1]];
         res.writeHead(200, mimeType);

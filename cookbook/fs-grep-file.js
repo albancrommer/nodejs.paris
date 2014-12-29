@@ -21,8 +21,8 @@ for( var i = 0; i < fileList.length; i ++){
             return;
         }
         while ((found = re.exec(cont)) !== null)
-        {
-            console.log("Found " + found[0] + " in "+fileList[i]);
+        { 
+           console.log("Found " + found[0] + " in "+fileList[i]);
         }
     });
 };
